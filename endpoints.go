@@ -6,6 +6,7 @@ const (
 	authTestApiEndpoint = "auth.test"
 
 	channelsListApiEndpoint    = "channels.list"
+	channelsCreateApiEndpoint  = "channels.create"
 	channelsJoinApiEndpoint    = "channels.join"
 	channelsHistoryApiEndpoint = "channels.history"
 

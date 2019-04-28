@@ -1,6 +1,7 @@
 package slack
 
 import (
+	"bytes"
 	"encoding/json"
 	"errors"
 	"net/url"
@@ -95,6 +96,19 @@ func (sl *Slack) FindChannelByName(name string) (*Channel, error) {
 	return sl.FindChannel(func(channel *Channel) bool {
 		return channel.Name == name
 	})
+}
+
+// API channels.create: Creates a channel.
+func (sl *Slack) CreateChannel(name string) error {
+	uv := sl.urlValues()
+	uv.Add("name", name)
+	uv.Add("validate", "true")
+
+	_, err := sl.PostRequest(channelsCreateApiEndpoint, uv, bytes.NewBufferString(""))
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 // API channels.join: Joins a channel, creating it if needed.
